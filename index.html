@@ -63,7 +63,7 @@
   var findID = document.querySelector("#findID");
   var findName = document.querySelector("#findName");
   var findAge = document.querySelector("#findAge");
-  var findPronoun = document.querySelector("#findPronoun");
+  var findPronoun = document.querySelector("#findPronouns");
 
   var updateBtn = document.querySelector("#update");
   var removeBtn = document.querySelector("#remove");
@@ -78,6 +78,7 @@
                 if(snapshot.exists()){
                     findName.innerHTML = "Name: " + snapshot.val().Name;
                     findAge.innerHTML = "Age: " + snapshot.val().Age;
+                    findAge.innerHTML = "Age: " + snapshot.val().Pronouns;
                 } else {
                     alert("No data found");
                 }
