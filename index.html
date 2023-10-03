@@ -5,24 +5,46 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Simple Database</title>
+    <body style="background-color:rgb(201, 128, 225);text-align:center">
+        </body>
+    <img src="cassidygram.png"
+         width="100%"
+         height="500"> <br>
     <style>
-        body {text-align: center;}
-  
-        #findDetails {float: left; width: 50%; background-color: floralwhite; color: darkslategray;}
-        input {width: 120px;}
+body { text-align: center; }
+
+#findDetailsFirst, #findDetailsSecond {
+    display: inline-block;
+    width: 100%;
+    background-color: rgb(201, 128, 225);
+    color: darkslategray;
+}
+input { width: 120px; }
     </style>
+
 
 </head>
 <body>
 
-    <div id="findDetails">
-        <h1>Find by ID</h1>
-        <h4>ID</h4>
-        <input id="findID" type="text" value="10"> <!-- Hardcoded ID value to 10 --> <br><br>
-        <h3 id="findName" type="text"></h3>
-        <h3 id="findAge" type="number"></h3> <br><br>
+    <div id="findDetailsFirst">
+        <h3 id="findIDFirst" type="text"></h3>
+        <h3 id="findNameFirst" type="text"></h3>
+        <h3 id="findAgeFirst" type="number"></h3>
+        <h3 id="findPronounsFirst" type="pronouns"></h3>
+        <h3 id="findStatusFirst" type="status"></h3>
+        <h3 id="findImageFirst" type="image"></h3>
+        <br><br>
     </div>
 
+<div id="findDetailsSecond">
+        <h3 id="findIDSecond" type="text"></h3>
+        <h3 id="findNameSecond" type="text"></h3>
+        <h3 id="findAgeSecond" type="number"></h3>
+        <h3 id="findPronounsSecond" type="pronouns"></h3>
+        <h3 id="findStatusSecond" type="status"></h3>
+        <h3 id="findImageSecond" type="image"></h3>
+    <br><br>
+    </div>
 
     <iframe src="https://thunkable.site/w/ztd5PEmqbMz-yCchAp92W" width="100%" height="500" frameborder="0"></iframe>
 
@@ -58,27 +80,36 @@
 
   const db = getDatabase();
 
-  var enterID = document.querySelector("#enterID");
-
-  var findID = document.querySelector("#findID");
-  var findName = document.querySelector("#findName");
-  var findAge = document.querySelector("#findAge");
-  var findPronoun = document.querySelector("#findPronouns");
-
-  var updateBtn = document.querySelector("#update");
-  var removeBtn = document.querySelector("#remove");
-  var findBtn = document.querySelector("#find");
 
 
-        function FindData() {
+var findIDFirst = document.querySelector("#findIDFirst");
+var findNameFirst = document.querySelector("#findNameFirst");
+var findAgeFirst = document.querySelector("#findAgeFirst");
+var findPronounsFirst = document.querySelector("#findPronounsFirst");
+var findStatusFirst = document.querySelector("#findStatusFirst");
+var findImageFirst = document.querySelector("#findImageFirst")
+
+var findIDSecond = document.querySelector("#findIDSecond");
+var findNameSecond = document.querySelector("#findNameSecond");
+var findAgeSecond = document.querySelector("#findAgeSecond");
+var findPronounsSecond = document.querySelector("#findPronounsSecond");
+var findStatusSecond = document.querySelector("#findStatusSecond");
+var findImageSecond = document.querySelector("#findImageSecond")
+
+        function FindData(idElement, nameElement, ageElement, pronounsElement, statusElement, id, imageElement) {
             const dbref = ref(db);
 
-            get(child(dbref, "People/" + findID.value))
+            get(child(dbref, id))
             .then((snapshot)=>{
                 if(snapshot.exists()){
-                    findName.innerHTML = "Name: " + snapshot.val().Name;
-                    findAge.innerHTML = "Age: " + snapshot.val().Age;
-                    findAge.innerHTML = "Age: " + snapshot.val().Pronouns;
+
+                    idElement.innerHTML = "ID: " + id;
+                    nameElement.innerHTML = "Name: " + snapshot.val().name;
+                    ageElement.innerHTML = "Age: " + snapshot.val().age;
+                    pronounsElement.innerHTML = "Pronoun: " + snapshot.val().pronoun;
+                    statusElement.innerHTML = "Status: " + snapshot.val().status;
+                    imageElement.innerHTML = `<img src="${snapshot.val().image}" width="400" height="400" alt="Image">`;
+
                 } else {
                     alert("No data found");
                 }
@@ -86,14 +117,23 @@
             .catch((error)=>{
                 alert(error)
             })
-            
+
         }
 
 
-        window.addEventListener('load', function () {
-            findID.value = '10';  // Set the findID input to 10
-            FindData();           // Trigger the FindData function
-        });
+        function FindDataWithFirstID() {
+            FindData(findIDFirst, findNameFirst, findAgeFirst, findPronounsFirst, findStatusFirst, 'QkBhVLYu5pXv8Y40VJ5PhYK66Kg1', findImageFirst);
+}
+function FindDataWithSecondID() {
+    FindData(findIDSecond, findNameSecond, findAgeSecond, findPronounsSecond, findStatusSecond, 'bgpWdq74otSQ9IeCy0ZItdG2ADh1', findImageSecond);
+}
+
+
+
+  window.addEventListener('load', function () {
+    FindDataWithFirstID();
+    FindDataWithSecondID();
+  });
 
 
       </script>
