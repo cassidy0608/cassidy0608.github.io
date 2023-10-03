@@ -5,15 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Simple Database</title>
-
+    <body style="background-color:rgb(201, 128, 225);text-align:center">
+        </body>
     <img src="cassidygram.png"
-         width="900"
-         height="300"> <br>
+         width="100%"
+         height="500"> <br>
     <style>
 body { text-align: center; }
+
 #findDetailsFirst, #findDetailsSecond {
     display: inline-block;
-    width: 50%;
+    width: 100%;
     background-color: rgb(201, 128, 225);
     color: darkslategray;
 }
@@ -106,7 +108,7 @@ var findImageSecond = document.querySelector("#findImageSecond")
                     ageElement.innerHTML = "Age: " + snapshot.val().age;
                     pronounsElement.innerHTML = "Pronoun: " + snapshot.val().pronoun;
                     statusElement.innerHTML = "Status: " + snapshot.val().status;
-                    imageElement.innerHTML = `<img src="${snapshot.val().image}" width="200" height="200" alt="Image">`;
+                    imageElement.innerHTML = `<img src="${snapshot.val().image}" width="400" height="400" alt="Image">`;
 
                 } else {
                     alert("No data found");
